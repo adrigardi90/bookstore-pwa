@@ -1,5 +1,5 @@
 
-console.log('APP')
+console.log('Main app js');
 
 if (!window.Promise) {
     window.Promise = Promise;

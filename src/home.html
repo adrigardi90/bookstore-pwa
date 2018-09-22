@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="scss/home.scss">
 
     <title>Books PWA</title>
 </head>
@@ -16,13 +16,13 @@
 <body>
     <div class="jumbotron jumbotron-fluid bookstore__header">
         <div class="container">
-            <h1 class="display-4">Fluid jumbotron</h1>
-            <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+            <h1 class="display-4">BOOK STORE</h1>
+            <p class="lead">Add all the books you really enjoyed</p>
         </div>
     </div>
 
     <div class="bookstore__new">
-        <button type="button" class="btn btn-outline-primary" href="./new/new.html">ADD A NEW BOOK</button>
+        <a class="btn btn-primary" href="./new/new.html">ADD A NEW BOOK</a>
     </div>
 
     <div class="container">
@@ -31,14 +31,16 @@
                 <div class="card" style="width: 15rem;">
                     <img class="card-img-top" src="https://moustique.cdnartwhere.eu/sites/default/files/styles/large/public/field/image/harry_potter.jpg?itok=b7SQ4_r2" alt="Card image cap">
                     <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-11 col-sm-4 col-md-5 col-xl-3 bookstore-list">
+            <div class="col-11 col-sm-4 col-md-5 col-xl-3 bookstore__list">
                     <div class="card" style="width: 15rem;">
                         <img class="card-img-top" src="https://moustique.cdnartwhere.eu/sites/default/files/styles/large/public/field/image/harry_potter.jpg?itok=b7SQ4_r2" alt="Card image cap">
                         <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         </div>
                     </div>
