@@ -1,3 +1,4 @@
-document.onreadystatechange = () => {
-    console.log('Home')
-}
+
+console.log('Home');
+
+
