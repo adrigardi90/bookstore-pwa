@@ -21,9 +21,25 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container pt-5">
+        <form>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" aria-describedby="title" placeholder="Enter title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" aria-describedby="description" placeholder="Enter description">
+            </div>
+            <div class="form-group">
+                <label for="image">Image URL</label>
+                <input type="url" class="form-control" id="image" aria-describedby="image" placeholder="Enter image url">
+            </div>
+        </form>
+        <div class="bookstore__submit">
+            <button class="btn btn-primary" onclick="book.save(event)">SAVE</button>
+        </div>
     </div>
-    
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -34,7 +50,6 @@
         crossorigin="anonymous"></script>
 
     <!-- JS -->
-    <!-- <script src="./../js/app.js"></script> -->
     <script src="./../js/new.js"></script>
 
 </body>

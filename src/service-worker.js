@@ -28,13 +28,14 @@ self.addEventListener('fetch', (event) => {
         if (response) {
           return response;
         } else {
-          return fetch(event.request).then((response) => {
-            // Most of the fetch are dynamic as we are using Parcel for bundle tool
-            return caches.open('DYNAMIC').then((cache) => {
-              cache.add(event.request.url, response.clone());
-              return response;
-            })
-          })
+            return fetch(event.request);
+        //   return fetch(event.request).then((response) => {
+        //     // Most of the fetch are dynamic as we are using Parcel for bundle tool
+        //     return caches.open('DYNAMIC').then((cache) => {
+        //       cache.add(event.request.url, response.clone());
+        //       return response;
+        //     })
+        //   })
         }
       })
   );

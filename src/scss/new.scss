@@ -1,0 +1,19 @@
+.bookstore {
+
+    &__header{
+        background: url(http://www.valeriekeim.com/wp-content/uploads/2015/02/Books.jpg);
+        background-size: 100%;
+
+        h1{
+            color: #ffeded;
+        }
+
+        p{
+            color: #ffcdcd;
+        }
+    }
+
+    &__submit{
+        text-align: center;
+    }
+}
