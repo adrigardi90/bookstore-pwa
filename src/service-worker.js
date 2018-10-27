@@ -1,5 +1,5 @@
 
-const DYNAMIC_CACHE = 'DYNAMIC-21';
+const DYNAMIC_CACHE = 'DYNAMIC-67';
 const STATIC_CACHE = 'STATIC';
 
 // Install is activated by the browser
@@ -44,7 +44,7 @@ self.addEventListener('fetch', (event) => {
         } else {
             //return fetch(event.request);
           return fetch(event.request).then((response) => {
-            // Most of the fetch are dynamic as we are using Parcel for bundle tool
+            // Most of the fetch are dynamic as we are using Parcel as a tool
             return caches.open(DYNAMIC_CACHE).then((cache) => {
               cache.add(event.request.url, response.clone());
               return response;

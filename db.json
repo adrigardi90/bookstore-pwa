@@ -1,14 +1,22 @@
 {
-    "books": [
-        {
-            "id": 0,
-            "title": "Harry Potter I",
-            "description": "Some quick example text to build on the card title and make up the bulk of the card's content"
-        },
-        {
-            "id": 1,
-            "title": "Harry Potter II",
-            "description": "Some quick example text to build on the card title and make up the bulk of the card's content"
-        }
-    ]
+  "books": [
+    {
+      "id": 0,
+      "title": "Harry Potter I",
+      "image": "https://moustique.cdnartwhere.eu/sites/default/files/styles/large/public/field/image/harry_potter.jpg?itok=b7SQ4_r2",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content"
+    },
+    {
+      "id": 1,
+      "title": "Harry Potter II",
+      "image": "https://moustique.cdnartwhere.eu/sites/default/files/styles/large/public/field/image/harry_potter.jpg?itok=b7SQ4_r2",
+      "description": "Some quick example text to build on the card title and make up the bulk of the card's content"
+    },
+    {
+      "title": "RINGS",
+      "image": "https://www.pexels.com/assets/icons/apple-touch-icon-e1336691483e7b52fb74222ba02f37bd256644ba5bc6ca81baecfaf1dc62a86b.png",
+      "description": "example",
+      "id": 2
+    }
+  ]
 }
