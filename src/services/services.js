@@ -32,4 +32,8 @@ export class BookService {
             return error;
         }
     }
+
+    getUrl() {
+        return this.url;
+    }
 }
