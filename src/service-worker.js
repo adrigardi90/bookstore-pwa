@@ -1,5 +1,5 @@
 
-const DYNAMIC_CACHE = 'DYNAMIC-81';
+const DYNAMIC_CACHE = 'DYNAMIC-92';
 const STATIC_CACHE = 'STATIC-1';
 
 // Install is activated by the browser

@@ -1,38 +1,52 @@
 
 import { BookService } from './../services/services';
+import { isArray } from 'util';
 
 const home = (() => {
 
     const bookService = new BookService();
     let booksFromNetwork = false;
+    let container = document.getElementById('cardRow');
 
-    const getBooks = () => {
-        bookService.getBooks().then(
-            (books) => {
-                console.log('Books from network', books)
-                booksFromNetwork = true;
-                printBooks(books)
-            },
-            (error) => toastr.error('Error retrieving your books'))
+    const clearBooks = () => {
+        while (container.hasChildNodes()) {
+            container.removeChild(container.lastChild)
+        }
     }
 
-    const getBooksFromCache = () => {
+    const getBooks = async () => {
+        try {
+            const books = await bookService.getBooks();
+            if (isArray(books)) {
+                console.log('Books from network', books)
+                booksFromNetwork = true;
+                clearBooks();
+                printBooks(books)
+            }
+        } catch (error) {
+            console.log('Error retrieving your books from Network')
+        }
+    }
+
+    const getBooksFromCache = async () => {
         if ('caches' in window) {
-            caches.match(bookService.getUrl())
-                .then(response => {
-                    if (!!response) return response.json()
-                }).then(books => {
-                    console.log('Books from cache', books)
-                    // We don't want to overwrite the network content with the cache
-                    if(!booksFromNetwork && !!books) printBooks(books)
-                })
+            try {
+                const response = await caches.match(bookService.getUrl());
+                const books = await response.json();
+                console.log('Books from cache', books)
+                // We don't want to overwrite the network content with the cache
+                if (!booksFromNetwork && !!books) {
+                    clearBooks();
+                    printBooks(books)
+                }
+            } catch (error) {
+                console.log('Error getting data form cache')
+            }
         }
     }
 
     const printBooks = (books) => {
         books.forEach((book) => {
-            const row = document.getElementById('cardRow');
-
             const wrapperCard = document.createElement('div');
             wrapperCard.className = 'col-11 col-sm-4 col-md-5 col-xl-3 bookstore__list mb-2';
 
@@ -62,8 +76,10 @@ const home = (() => {
             card.appendChild(body);
 
             wrapperCard.appendChild(card);
-            row.appendChild(wrapperCard);
+            container.appendChild(wrapperCard);
         })
+
+        
     }
 
     return {
@@ -71,7 +87,6 @@ const home = (() => {
         getBooksFromCache: getBooksFromCache,
     }
 })();
-
 
 // Get data
 home.getBooks();
