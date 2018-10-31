@@ -1,7 +1,4 @@
-
-
 import { BookService } from './../services/services';
-
 
 export const save = (event) => {
     const title = document.getElementById('title').value;
