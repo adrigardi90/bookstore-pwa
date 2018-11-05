@@ -12,7 +12,7 @@ const STATIC_FILES = [
 
 // Install is activated by the browser
 self.addEventListener('install', (event) => {
-  console.log('Installing Service Worker...');
+  console.log('[Service worker] Installing Service Worker...');
   event.waitUntil(
     caches.open(STATIC_CACHE).then((cache) => {
       console.log('Shell cache');
@@ -23,7 +23,7 @@ self.addEventListener('install', (event) => {
 
 // Activation is activated by the browser
 self.addEventListener('activate', (event) => {
-  console.log('Activated Service Worker')
+  console.log('[Service worker] Activated Service Worker')
 
   // Remove the old cache if there is a new code version
   event.waitUntil(

@@ -9,7 +9,7 @@ const IDB_TABLE = 'postss';
  */
 const idbPromise = idb.open(IDB_NAME, IDB_VERSION, (db) => {
     if (!db.objectStoreNames.contains(IDB_TABLE)) {
-        console.log('creating table')
+        console.log('[Idb] Creating table', IDB_TABLE)
         db.createObjectStore(IDB_TABLE, {
             keyPath: 'id'
         });

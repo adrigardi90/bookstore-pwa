@@ -7,10 +7,10 @@ export const save = (event) => {
     const book = {title, image, description}
 
     new BookService().createBook(book).then(res => {
-        toastr.success('Book saved correctly', `${book.title}`)
+        toastr.success('[New] Book saved correctly', `${book.title}`)
         setTimeout( () => window.location.href = '/' , 2000)
     }, err => {
-        toastr.error('Something was wrong', `${book.title}`)
+        toastr.error('[New] Something was wrong', `${book.title}`)
         console.log(err)
     })
     

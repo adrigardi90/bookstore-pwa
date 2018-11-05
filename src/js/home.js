@@ -25,7 +25,7 @@ const home = (() => {
                 printBooks(books)
             }
         } catch (error) {
-            console.log('[Home] Error retrieving your books from Network')
+            console.log('[Home] Error retrieving your books from the Network')
         }
     }
 
