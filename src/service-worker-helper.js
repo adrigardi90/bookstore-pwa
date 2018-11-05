@@ -1,40 +1,44 @@
-export const cacheThenNetwork = (cacheName, event) => {
-    return caches.open(cacheName).then(cache => {
-        return fetch(event.request).then(response => {
-            cache.put(event.request, response.clone())
-            return response;
-        })
-    })
+import 'babel-polyfill';
+
+import { idbMethods } from './js/idb.js';
+
+
+export const cacheThenNetwork = async (cacheName, event) => {
+    const response = await fetch(event.request);
+    const data = await response.json();
+    // Remove old indexDB data
+    const clearData = await idbMethods.clear();
+    data.forEach(item => idbMethods.set(item));
+    return response;
 }
 
-export const cacheNetworkFallback = (staticCache, dynamicCache, event) => {
-    return caches.match(event.request).then((response) => {
-        if (response) { // return response if it's cached
-            console.log(`Found ${event.request.url} in cache`);
-            return response;
-        } else {
-            console.log(`${event.request.url} not found in cache. Tying to get it from the network...`);
-            return fetch(event.request).then((response) => {
-                console.log(`${event.request.url} retrieved from the network`)
-                // Most of the fetch are dynamic as we are using Parcel as a tool
-                return caches.open(dynamicCache).then((cache) => {
-                    cache.add(event.request.url, response.clone());
-                    return response;
-                })
-            }).catch(error => {
-                console.log(`Error fetching from Network:  ${event.request}: ${error}`);
+export const cacheNetworkFallback = async (staticCache, dynamicCache, event) => {
+    const cacheResponse = await caches.match(event.request);
 
-                return caches.open(staticCache).then(cache => {
-                    // We can check all content type here to return specific content
-                    if (event.request.headers.get('accept').includes('text/html')) {
-                        return cache.match('offline-support.html')
-                    }
-                })
-            })
+    // return response if it's cached
+    if (cacheResponse) {
+        console.log(`Found ${event.request.url} in cache`);
+        return cacheResponse;
+    } else {
+        console.log(`${event.request.url} not found in cache. Tying to get it from the network...`);
+
+        try {
+            const networkResponse = await fetch(event.request);
+            console.log(`${event.request.url} retrieved from the network`)
+
+            const cache = await caches.open(dynamicCache);
+            cache.add(event.request.url, networkResponse.clone());
+            return networkResponse
+        } catch (error) {
+            console.log(`Error fetching from Network:  ${event.request.url}: ${error}`);
+
+            const cache = await caches.open(staticCache);
+            // We can check all content type here to return specific content
+            if (event.request.headers.get('accept').includes('text/html')) {
+                return cache.match('offline-support.html')
+            }
         }
-    }).catch((error) => {
-        console.log(`Error fetching: ${event.request}: ${error}`);
-    })
+    }
 }
 
 export const trimCache = (cacheName, maxKeys) => {

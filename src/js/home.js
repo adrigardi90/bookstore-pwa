@@ -1,6 +1,7 @@
 
 import { BookService } from './../services/services';
 import { isArray } from 'util';
+import { idbMethods} from './idb';
 
 const home = (() => {
 
@@ -18,29 +19,28 @@ const home = (() => {
         try {
             const books = await bookService.getBooks();
             if (isArray(books)) {
-                console.log('Books from network', books)
+                console.log('[Home] Books from network', books)
                 booksFromNetwork = true;
                 clearBooks();
                 printBooks(books)
             }
         } catch (error) {
-            console.log('Error retrieving your books from Network')
+            console.log('[Home] Error retrieving your books from Network')
         }
     }
 
     const getBooksFromCache = async () => {
-        if ('caches' in window) {
+        if ('indexedDB' in window) {
             try {
-                const response = await caches.match(bookService.getUrl());
-                const books = await response.json();
-                console.log('Books from cache', books)
+                const books = await idbMethods.getAllData()
+                console.log('[Home] Books from indexDB', books)
                 // We don't want to overwrite the network content with the cache
                 if (!booksFromNetwork && !!books) {
                     clearBooks();
                     printBooks(books)
                 }
             } catch (error) {
-                console.log('Error getting data form cache')
+                console.log('[Home] Error getting data form indexDB')
             }
         }
     }
