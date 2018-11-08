@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 
-import { idbMethods } from './js/idb.js';
+import { idbMethods } from './js/features/idb.js';
 
 
 export const cacheThenNetwork = async (cacheName, event) => {

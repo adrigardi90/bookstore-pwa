@@ -1,9 +1,9 @@
 import { cacheThenNetwork, cacheNetworkFallback } from './service-worker-helper';
 import { SYNC_BOOK, IDB_TABLE_SYNC } from './js/constants';
-import { idbMethods } from './js/idb';
+import { idbMethods } from './js/features/idb';
 import { BookService } from './services/services';
 
-const DYNAMIC_CACHE = 'DYNAMIC-111';
+const DYNAMIC_CACHE = 'DYNAMIC-118';
 const STATIC_CACHE = 'STATIC-1';
 const STATIC_FILES = [
   'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',

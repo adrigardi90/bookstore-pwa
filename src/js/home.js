@@ -1,7 +1,7 @@
 
 import { BookService } from './../services/services';
 import { isArray } from 'util';
-import { idbMethods} from './idb';
+import { idbMethods} from './features/idb';
 
 const home = (() => {
 

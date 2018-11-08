@@ -1,5 +1,5 @@
 import idb from 'idb';
-import { IDB_TABLE_SYNC, IDB_TABLE, IDB_NAME } from './constants';
+import { IDB_TABLE_SYNC, IDB_TABLE, IDB_NAME } from '../constants';
 
 const IDB_VERSION = 1;
 

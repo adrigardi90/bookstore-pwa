@@ -1,4 +1,8 @@
 
+import { showNotifications } from './features/notifications';
+
+const notificationButton = document.getElementById('notification')
+
 if (!window.Promise) {
     window.Promise = Promise;
 }
@@ -12,4 +16,9 @@ if ('serviceWorker' in navigator) {
         .catch(function (err) {
             console.log(err);
         });
+}
+
+// Notification API
+if ('Notification' in window) {
+    notificationButton.addEventListener('click', showNotifications)
 }
