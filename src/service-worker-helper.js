@@ -5,10 +5,16 @@ import { idbMethods } from './js/idb.js';
 
 export const cacheThenNetwork = async (cacheName, event) => {
     const response = await fetch(event.request);
-    const data = await response.json();
+    const data = await response.clone().json();
+    
     // Remove old indexDB data
     const clearData = await idbMethods.clear();
-    data.forEach(item => idbMethods.set(item));
+    if (event.request.method === 'GET') {
+        data.forEach(item => idbMethods.set(item));
+    } else {
+        idbMethods.set(data)
+    }
+
     return response;
 }
 

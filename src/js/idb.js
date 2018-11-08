@@ -1,8 +1,8 @@
 import idb from 'idb';
+import { IDB_TABLE_SYNC, IDB_TABLE, IDB_NAME } from './constants';
 
 const IDB_VERSION = 1;
-const IDB_NAME = 'data-posts';
-const IDB_TABLE = 'postss';
+
 
 /**
  * IDB conection
@@ -14,32 +14,45 @@ const idbPromise = idb.open(IDB_NAME, IDB_VERSION, (db) => {
             keyPath: 'id'
         });
     }
+    if (!db.objectStoreNames.contains(IDB_TABLE_SYNC)) {
+        console.log('[Idb] Creating table', IDB_TABLE_SYNC)
+        db.createObjectStore(IDB_TABLE_SYNC, {
+            keyPath: 'title'
+        });
+    }
 })
 
 export const idbMethods = {
-    get(key) {
+    get(key, indexDB = IDB_TABLE) {
         return idbPromise.then(db => {
-            return db.transaction(IDB_TABLE)
-                .objectStore(IDB_TABLE).get(key);
+            return db.transaction(indexDB)
+                .objectStore(indexDB).get(key);
         });
     },
-    set(data) {
+    set(data, indexDB = IDB_TABLE) {
         return idbPromise.then(db => {
-            const tx = db.transaction(IDB_TABLE, 'readwrite');
-            tx.objectStore(IDB_TABLE).put(data);
+            const tx = db.transaction(indexDB, 'readwrite');
+            tx.objectStore(indexDB).put(data);
             return tx.complete;
         });
     },
-    getAllData() {
+    getAllData(indexDB = IDB_TABLE) {
         return idbPromise.then(db => {
-            const tx = db.transaction(IDB_TABLE, 'readonly');
-            return tx.objectStore(IDB_TABLE).getAll();
+            const tx = db.transaction(indexDB, 'readonly');
+            return tx.objectStore(indexDB).getAll();
         })
     },
-    clear() {
+    clear(indexDB = IDB_TABLE) {
         return idbPromise.then(db => {
-            const tx = db.transaction(IDB_TABLE, 'readwrite');
-            tx.objectStore(IDB_TABLE).clear();
+            const tx = db.transaction(indexDB, 'readwrite');
+            tx.objectStore(indexDB).clear();
+            return tx.complete;
+        });
+    },
+    delete(key, indexDB = IDB_TABLE) {
+        return idbPromise.then(db => {
+            const tx = db.transaction(indexDB, 'readwrite');
+            tx.objectStore(indexDB).delete(key);
             return tx.complete;
         });
     },
