@@ -3,7 +3,7 @@ import { SYNC_BOOK, IDB_TABLE_SYNC } from './js/constants';
 import { idbMethods } from './js/features/idb';
 import { BookService } from './services/services';
 
-const DYNAMIC_CACHE = 'DYNAMIC-118';
+const DYNAMIC_CACHE = 'DYNAMIC-122';
 const STATIC_CACHE = 'STATIC-1';
 const STATIC_FILES = [
   'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
@@ -12,6 +12,7 @@ const STATIC_FILES = [
   'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
   'offline-support.html'
 ];
+
 
 // Install is activated by the browser
 self.addEventListener('install', (event) => {
@@ -23,6 +24,7 @@ self.addEventListener('install', (event) => {
     })
   );
 });
+
 
 // Activation is activated by the browser
 self.addEventListener('activate', (event) => {
@@ -39,6 +41,7 @@ self.addEventListener('activate', (event) => {
     })
   );
 });
+
 
 // Fetch data
 self.addEventListener('fetch', (event) => {
@@ -58,6 +61,7 @@ self.addEventListener('fetch', (event) => {
   }
 });
 
+
 // Background sync
 self.addEventListener('sync', (event) => {
   console.log('[SYNC Service Worker] Background sync', event)
@@ -70,7 +74,7 @@ self.addEventListener('sync', (event) => {
           console.log('[SYNC Service Worker] Sync book ', data)
           new BookService().createBook(book).then((res) => {
             console.log(`[SYNC Service Worker] Sync Book ${book.title} created `);
-            idbMethods.delete(res.title, IDB_TABLE_SYNC).then( res => {
+            idbMethods.delete(res.title, IDB_TABLE_SYNC).then(res => {
               console.log(`[SYNC Service Worker] Sync Book ${book.title} deleted from IDB `)
             })
           })
@@ -79,3 +83,30 @@ self.addEventListener('sync', (event) => {
     )
   }
 });
+
+
+// Push notification from the server
+self.addEventListener('push', (event) => {
+  console.log(`[PUSH Service Worker] Notification received: ${event}`)
+  const data = JSON.parse(event.data.text());
+  const opt = {
+    body: ' NEW BOOK ADDED',
+    icon: '/src/images/icons/app-icon-96x96.png',
+    image: '/src/images/books-image.jpg'
+  }
+
+  event.waitUntil(self.registration.showNotification(data.title, opt))
+})
+
+
+// Notification
+self.addEventListener('notificationsclick', (e) => {
+  const action = e.action;
+  const notification = e.notification;
+  console.log(`[Notification] Notification with action: ${action}`)
+  notification.close();
+})
+
+self.addEventListener('notificationclose', (e) => {
+  console.log('[Notification] Notification close')
+})

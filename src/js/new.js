@@ -1,7 +1,6 @@
 import { BookService } from './../services/services';
 import { backSync } from './features/back-sync';
 
-
 export const save = (event) => {
     event.preventDefault();
     const title = document.getElementById('title').value;
@@ -21,7 +20,7 @@ const sendBook = (book) => {
         new BookService().createBook(book).then(res => {
             if (res.message !== 'Failed to fetch') {
                 toastr.success('Book saved correctly', `${book.title}`)
-                setTimeout(() => window.location.href = '/', 2000)
+                // setTimeout(() => window.location.href = '/', 2000)
             } else {
                 backSync(book);
             }

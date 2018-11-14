@@ -4,23 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && parcel ./src/home.html --no-cache --global book",
+    "build": "sudo rimraf dist && parcel ./src/home.html --no-cache --global book",
+    "build:server": "sudo rimraf dist-server && parcel build ./server/server.js --no-cache --target=node --bundle-node-modules  -d dist-server",
     "run:mock-server": "json-server --watch db.json",
+    "run:hapi": "node ./dist-server/server.js",
+    "generate-key": "web-push generate-vapid-keys",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-runtime": "^6.26.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "@babel/runtime-corejs2": "^7.1.5",
+    "isemail": "^3.2.0",
     "json-server": "^0.14.0",
     "node-sass": "^4.9.3",
     "parcel-bundler": "1.10.1",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
-    "idb": "^2.1.3"
+    "babel-polyfill": "^6.26.0",
+    "hapi": "^17.7.0",
+    "idb": "^2.1.3",
+    "web-push": "^3.3.3"
   }
 }

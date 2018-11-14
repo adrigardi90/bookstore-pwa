@@ -1,5 +1,5 @@
 
-import { showNotifications } from './features/notifications';
+import { enableNotifications } from './features/notifications';
 
 const notificationButton = document.getElementById('notification')
 
@@ -18,7 +18,11 @@ if ('serviceWorker' in navigator) {
         });
 }
 
-// Notification API
-if ('Notification' in window) {
-    notificationButton.addEventListener('click', showNotifications)
+// Notification & Push API
+if (('Notification' in window) && ('serviceWorker' in navigator)) {
+    notificationButton.addEventListener('click', enableNotifications)
+} else {
+    notificationButton.addEventListener('click', () => {
+        toastr.warning('Browser does not suppor notifications');
+    })
 }
