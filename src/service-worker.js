@@ -2,6 +2,7 @@ import { cacheThenNetwork, cacheNetworkFallback } from './service-worker-helper'
 import { SYNC_BOOK, IDB_TABLE_SYNC } from './js/constants';
 import { idbMethods } from './js/features/idb';
 import { BookService } from './services/services';
+import { options } from'./js/features/notifications';
 
 const DYNAMIC_CACHE = 'DYNAMIC-122';
 const STATIC_CACHE = 'STATIC-1';
@@ -89,10 +90,11 @@ self.addEventListener('sync', (event) => {
 self.addEventListener('push', (event) => {
   console.log(`[PUSH Service Worker] Notification received: ${event}`)
   const data = JSON.parse(event.data.text());
-  const opt = {
+  const opt = {...options,
     body: ' NEW BOOK ADDED',
-    icon: '/src/images/icons/app-icon-96x96.png',
-    image: '/src/images/books-image.jpg'
+    data: {
+      redirectTo: data.redirectTo,
+    }
   }
 
   event.waitUntil(self.registration.showNotification(data.title, opt))
@@ -100,11 +102,24 @@ self.addEventListener('push', (event) => {
 
 
 // Notification
-self.addEventListener('notificationsclick', (e) => {
-  const action = e.action;
-  const notification = e.notification;
+self.addEventListener('notificationclick', (event) => {
+  const action = event.action;
+  const notification = event.notification;
   console.log(`[Notification] Notification with action: ${action}`)
-  notification.close();
+
+  event.waitUntil(
+    clients.matchAll().then(cl => {
+      let clientOpen = cl.find(c => c.visibilityState === 'visible');
+
+      if (clientOpen) {
+        clientOpen.navigate(notification.data.redirectTo)
+        clientOpen.focus()
+      } else {
+        clientOpen.openWindow(notification.data.redirectTo)
+      }
+      notification.close();
+    })
+  )
 })
 
 self.addEventListener('notificationclose', (e) => {

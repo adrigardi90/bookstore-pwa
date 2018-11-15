@@ -12,7 +12,7 @@ export const enableNotifications = () => {
 }
 
 // Notifications options
-const options = {
+export const options = {
     body: 'Body',
     icon: '/src/images/icons/app-icon-96x96.png',
     image: '/src/images/books-image.jpg',
@@ -22,29 +22,29 @@ const options = {
     tag: 'new-notification', // id
     badge: '/src/images/icons/app-icon-96x96.png', // icon for the notification bar (just Android)
     renotify: true,
-    actions :[
-        {
-            actions: 'confirm',
-            title: 'Accept',
-            icon: '/src/images/icons/app-icon-96x96.png',
-        },
-        {
-            actions: 'cancel',
-            title: 'Cancel',
-            icon: '/src/images/icons/app-icon-96x96.png',
-        }
-    ]
+    // actions :[
+    //     {
+    //         actions: 'confirm',
+    //         title: 'Accept',
+    //         icon: '/src/images/icons/app-icon-96x96.png',
+    //     },
+    //     {
+    //         actions: 'cancel',
+    //         title: 'Cancel',
+    //         icon: '/src/images/icons/app-icon-96x96.png',
+    //     }
+    // ]
 }
 
 // Display a notification through SW 
-const createNotification = () => {
-    console.log('[Notification] Notifications accepted')
+// const createNotification = () => {
+//     console.log('[Notification] Notifications accepted')
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.ready.then(sw => {
-            sw.showNotification('Permission accepted', options)
-        })
-    }
+//     if ('serviceWorker' in navigator) {
+//         navigator.serviceWorker.ready.then(sw => {
+//             sw.showNotification('Permission accepted', options)
+//         })
+//     }
 
-}
+// }
 

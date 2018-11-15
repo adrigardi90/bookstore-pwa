@@ -39,7 +39,8 @@ export const BOOKS_ROUTES = {
             subscriptions.forEach(sub => {
                 webpush.sendNotification(sub, JSON.stringify({
                     title: `Book ${book.title} added`,
-                    book: book
+                    book: book,
+                    redirectTo: '/'
                 })).catch(err => {
                     console.log('[NOTIFICATION] Error sending notification ', err)
                 })

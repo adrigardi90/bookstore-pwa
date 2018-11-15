@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "sudo rimraf dist && parcel ./src/home.html --no-cache --global book",
-    "build:server": "sudo rimraf dist-server && parcel build ./server/server.js --no-cache --target=node --bundle-node-modules  -d dist-server",
+    "build:client": "sudo rimraf -r dist && parcel ./src/home.html --no-cache --global book",
+    "build:server": "sudo rimraf -r dist-server && parcel build ./server/server.js --no-cache --target=node --bundle-node-modules  -d dist-server",
     "run:mock-server": "json-server --watch db.json",
     "run:hapi": "node ./dist-server/server.js",
     "generate-key": "web-push generate-vapid-keys",
