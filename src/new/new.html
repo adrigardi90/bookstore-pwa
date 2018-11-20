@@ -33,11 +33,18 @@
                 <label for="description">Description</label>
                 <input type="text" class="form-control" id="description" aria-describedby="description" placeholder="Enter description">
             </div>
-            <div class="form-group">
+            <div class="form-group" id="imagePicker">
                 <label for="image">Image URL</label>
                 <input type="url" class="form-control" id="image" aria-describedby="image" placeholder="Enter image url">
             </div>
         </form>
+        <div class="bookstore__media">
+            <video id="player" autoplay></video>
+            <canvas id="canvas" width="320px" height="320px" class="bookstore__media__canvas"></canvas>
+            <div>
+                <button id="capture" class="btn btn-secondary" onclick="book.captureImage(event)">Take photo</button>
+            </div>
+        </div>
         <div class="bookstore__submit">
             <button class="btn btn-primary" onclick="book.save(event)">SAVE</button>
         </div>

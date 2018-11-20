@@ -16,4 +16,38 @@
     &__submit{
         text-align: center;
     }
+
+    &__media{
+        display: grid;
+        text-align: center;
+        margin-bottom: 3rem;
+
+        div {
+            margin: 1rem;
+        }
+
+        &__canvas{
+            margin: 0 auto;
+            display: none;
+            max-width: 100%;
+            width: 400px;
+        }
+
+        &  button {
+            margin: 0 auto;
+            display: none;
+        }
+
+        & video{
+            max-width: 100%;
+            width: 400px;
+            margin: 0 auto;
+            display: none;
+        }
+    }
+
+}
+
+#imagePicker {
+    display: none;
 }

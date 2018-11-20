@@ -4,7 +4,7 @@ import { idbMethods } from './js/features/idb';
 import { BookService } from './services/services';
 import { options } from'./js/features/notifications';
 
-const DYNAMIC_CACHE = 'DYNAMIC-122';
+const DYNAMIC_CACHE = 'DYNAMIC-150';
 const STATIC_CACHE = 'STATIC-1';
 const STATIC_FILES = [
   'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css',
