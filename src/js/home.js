@@ -48,7 +48,7 @@ const home = (() => {
     const printBooks = (books) => {
         books.forEach((book) => {
             const wrapperCard = document.createElement('div');
-            wrapperCard.className = 'col-11 col-sm-4 col-md-5 col-xl-3 bookstore__list mb-2';
+            wrapperCard.className = 'col-11 col-sm-6 col-md-5 col-xl-3 bookstore__list mb-2';
 
             const card = document.createElement('div');
             card.className = 'card';

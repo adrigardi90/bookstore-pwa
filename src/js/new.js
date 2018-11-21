@@ -51,7 +51,7 @@ const sendBook = (book) => {
         new BookService().createBook(book).then(res => {
             if (res.message !== 'Failed to fetch') {
                 toastr.success('Book saved correctly', `${book.title}`)
-                // setTimeout(() => window.location.href = '/', 2000)
+                setTimeout(() => window.location.href = '/', 3000)
             } else {
                 backSync(book);
             }
