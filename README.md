@@ -1,5 +1,5 @@
 # bookstore-pwa
-> PWA using JS, scss, HTML5 and [hapiJS] (https://hapijs.com) with [Parcel](http://parceljs.org). Offline support, background synchronization, push notifications and camera media access
+> PWA using JS, scss, HTML5 and [hapiJS](https://hapijs.com) with [Parcel](http://parceljs.org). Offline support, background synchronization, push notifications and camera media access
 
 ## Quick start
 

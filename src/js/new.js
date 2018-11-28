@@ -14,9 +14,7 @@ let imageCaptured;
 
 export const save = (event) => {
     event.preventDefault();
-    // const title = title.value;
-    // const description = document.getElementById('description').value;
-    // const image = document.getElementById('image').value;
+    
     const book = { 
         title: title.value, 
         image: image.value || imageCaptured, 
