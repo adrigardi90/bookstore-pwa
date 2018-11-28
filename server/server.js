@@ -1,10 +1,11 @@
 // To solve ReferenceError: regeneratorRuntime is not defined when we use async/await with Parcel
 import 'babel-polyfill';
 
-const Hapi = require('hapi');
 import { BOOKS_ROUTES } from './routes/books';
 import { SUB_ROUTES } from './routes/subscriptions';
+import { db } from './db/db'
 
+const Hapi = require('hapi');
 
 // Server 
 const server = Hapi.server({
@@ -17,8 +18,7 @@ const server = Hapi.server({
 
 
 // Books API
-server.route(BOOKS_ROUTES.GET);
-server.route(BOOKS_ROUTES.POST);
+server.route(BOOKS_ROUTES);
 
 // Subscriptions API
 server.route(SUB_ROUTES.POST);

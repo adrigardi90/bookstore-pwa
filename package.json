@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:client": "sudo rimraf -r dist && parcel ./src/home.html --no-cache --global book",
-    "build:server": "sudo rimraf -r dist-server && parcel build ./server/server.js --no-cache --target=node --bundle-node-modules  -d dist-server",
+    "build:server": "sudo rimraf -r dist-server && parcel build ./server/server.js --no-cache --target=node  -d dist-server",
     "run:mock-server": "json-server --watch db.json",
     "run:hapi": "node ./dist-server/server.js",
     "generate-key": "web-push generate-vapid-keys",
@@ -29,6 +29,7 @@
     "babel-polyfill": "^6.26.0",
     "hapi": "^17.7.0",
     "idb": "^2.1.3",
+    "mongoose": "^5.3.14",
     "web-push": "^3.3.3"
   }
 }
